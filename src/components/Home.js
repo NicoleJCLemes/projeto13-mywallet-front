@@ -85,7 +85,7 @@ export default function Home() {
                     total -= parseInt(withdrawal.amount)
                     return <p className="transaction" key={withdrawal._id}><span className="date">{withdrawal.date}</span> <span className="description">{withdrawal.description}</span> <span className="withdrawal-amount">{withdrawal.amount}</span></p>
                 })}
-                <p className="balance-total"><span className="balance">SALDO</span> <span className="total">{total}</span></p>
+                <P total={total} className="balance-total"><span className="balance">SALDO</span> <span className="total">{total}</span></P>
             </div>
             <footer>
                 <Link to='/deposit'>
@@ -134,6 +134,12 @@ function totalColor(p) {
         return '#C70000';
     }
 }
+
+const P = styled.p`
+    .total {
+        color: ${({total}) => totalColor(total)};
+    }
+`
 
 const Main = styled.main`
 
@@ -236,7 +242,6 @@ const Main = styled.main`
             font-size: 17px;
             line-height: 20px;
             text-align: right;
-            color: ${({total}) => totalColor(total)};
         }
 
         .balance-total {

@@ -30,7 +30,6 @@ export default function SignInPage() {
             localStorage.setItem("name", `${response.data.name}`);
             setName(response.data.name);
             setToken(response.data.token);
-            console.log(response.data)
             navigate('/home');
         });
 
