@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Home() {
 
+export default function Home() {
+    
     const context = useContext(UserContext);
     const {name, token} = context;
     const [deposits, setDeposits] = useState([]);
@@ -54,15 +55,18 @@ export default function Home() {
     function logOut() {
         localStorage.clear();
 
-        const promise = axios.delete(`http://localhost:5000/${userId}`);
+        const promise = axios.delete(`http://localhost:5000/${userId}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
         promise.then((res) => console.log(res.data));
 
         navigate("/");
     }
 
-    const transactions = [...deposits, ...withdrawals].sort(compare)
-
-    console.log(deposits, withdrawals);
+    deposits.sort(compare);
+    withdrawals.sort(compare);
 
     return (deposits.length !== 0 || withdrawals.length !== 0) ? ( //terminar o css e testar
         <Main>
@@ -71,10 +75,15 @@ export default function Home() {
                 <ion-icon onClick={logOut} name="exit-outline"></ion-icon>
             </header>
             <div className="transaction-board">
-                {transactions.map((transaction) =>
+                {deposits.map((deposit) =>
                 {
-                    total += parseInt(transaction.amount)
-                    return <p key={transaction._id}><span className="date">{transaction.date}</span> <span className="description">{transaction.description}</span> <span className="deposit-amount">{transaction.amount}</span></p>
+                    total += parseInt(deposit.amount)
+                    return <p className="transaction" key={deposit._id}><span className="date">{deposit.date}</span> <span className="description">{deposit.description}</span> <span className="deposit-amount">{deposit.amount}</span></p>
+                })}
+                {withdrawals.map((withdrawal) =>
+                {
+                    total -= parseInt(withdrawal.amount)
+                    return <p className="transaction" key={withdrawal._id}><span className="date">{withdrawal.date}</span> <span className="description">{withdrawal.description}</span> <span className="withdrawal-amount">{withdrawal.amount}</span></p>
                 })}
                 <p className="balance-total"><span className="balance">SALDO</span> <span className="total">{total}</span></p>
             </div>
@@ -118,10 +127,13 @@ export default function Home() {
     )
 }
 
-function balanceColor(total) {
-    if(total >= 0) return "#03AC00";
-    else return "#C70000";
-} // testar
+function totalColor(p) {
+    if (p >= 0) {
+        return '#03AC00';
+    } else if (p < 0) {
+        return '#C70000';
+    }
+}
 
 const Main = styled.main`
 
@@ -209,6 +221,7 @@ const Main = styled.main`
     .transaction-board {
 
         position: relative;
+        padding: 23px 11px 10px 15px;
 
         .balance {
             font-style: normal;
@@ -223,7 +236,7 @@ const Main = styled.main`
             font-size: 17px;
             line-height: 20px;
             text-align: right;
-            color: ${({total}) => balanceColor(total)}; // testar
+            color: ${({total}) => totalColor(total)};
         }
 
         .balance-total {
@@ -234,5 +247,38 @@ const Main = styled.main`
             display: flex;
             justify-content: space-between;
         }
+
+        .date .description .amount {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            width: 300px;
+        }
+
+        .transaction {
+            position: relative;
+        }
+
+        .date {
+            color: #C6C6C6;
+            margin-right: 5px;
+        }
+
+        .description {
+            color: #000000;
+        }
+
+        .deposit-amount {
+            color: #03AC00;
+            position: absolute;
+            right: 0;
+        }
+
+        .withdrawal-amount {
+            color: #C70000;
+            position: absolute;
+            right: 0;
+        }
+
     }
 `

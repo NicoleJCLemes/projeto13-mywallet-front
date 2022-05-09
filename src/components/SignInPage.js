@@ -31,7 +31,7 @@ export default function SignInPage() {
             setName(response.data.name);
             setToken(response.data.token);
             console.log(response.data)
-            navigate('/deposit');
+            navigate('/home');
         });
 
         promise.catch((e) => {

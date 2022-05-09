@@ -52,6 +52,7 @@ const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
         overflow-x: hidden;
+        overflow-y: hidden;
     }
     a {
         text-decoration: none;
