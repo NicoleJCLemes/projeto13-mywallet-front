@@ -26,12 +26,13 @@ export default function SignUpPage() {
 
         promise.then((response) => {
             console.log(response.data);
-            navigate("/");
+            navigate('/');
         });
 
         promise.catch((e) => {
             console.log(e.request.status)
-            alert("Não foi possível realizar o cadastro!")})
+            alert("Não foi possível realizar o cadastro!")
+        })
 
     }
 

@@ -3,13 +3,16 @@ import Input from '../style/Input';
 import Button from '../style/Button';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import UserContext from '../context/UserContext';
 
 export default function SignInPage() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const context = useContext(UserContext);
+    const {setToken} = context;
 
     function signIn(e) {
         e.preventDefault();
@@ -22,12 +25,15 @@ export default function SignInPage() {
 
         promise.then((response) => {
             console.log(response.status);
-            navigate("/");
+            localStorage.setItem("token", `${response.data}`);
+            setToken(response.data.token);
+            navigate('/deposit');
         });
 
         promise.catch((e) => {
             console.log(e.request.status)
-            alert("Não foi possível realizar o login!")})
+            alert("Não foi possível realizar o login!")
+        })
 
     }
 
