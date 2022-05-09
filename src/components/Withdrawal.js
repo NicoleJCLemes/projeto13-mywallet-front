@@ -34,7 +34,7 @@ export default function Withdrawal() {
     
         promise.then((response) => {
             console.log(response.status);
-            navigate('/withdrawal');
+            navigate('/home');
         })
     
         promise.catch((e) => {

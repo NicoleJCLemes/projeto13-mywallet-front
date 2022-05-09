@@ -12,12 +12,13 @@ export default function SignInPage() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const context = useContext(UserContext);
-    const {setToken} = context;
+    const {setToken, setName} = context;
 
     function signIn(e) {
         e.preventDefault();
 
         const URL = "http://localhost:5000/";
+
         const promise = axios.post(URL, {
             email,
             password,
@@ -25,14 +26,17 @@ export default function SignInPage() {
 
         promise.then((response) => {
             console.log(response.status);
-            localStorage.setItem("token", `${response.data}`);
+            localStorage.setItem("token", `${response.data.token}`);
+            localStorage.setItem("name", `${response.data.name}`);
+            setName(response.data.name);
             setToken(response.data.token);
+            console.log(response.data)
             navigate('/deposit');
         });
 
         promise.catch((e) => {
-            console.log(e.request.status)
-            alert("Não foi possível realizar o login!")
+            console.log(e.request.status);
+            alert("Não foi possível realizar o login!");
         })
 
     }

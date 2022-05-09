@@ -31,18 +31,19 @@ export default function Deposit() {
                 "Authorization": `Bearer ${token}`
             }
         };
-
+        
         const promise = axios.post(URL, body, config);
     
         promise.then((response) => {
             console.log(response.status);
-            navigate('/withdrawal');
+            navigate('/home');
         });
     
         promise.catch((e) => {
             console.log(e.request.status);
             alert("Não foi possível enviar seu depósito");
         });
+
     }
 
     return(

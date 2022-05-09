@@ -11,7 +11,7 @@ export default function SignUpPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmed, setPasswordConfirmed] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     function signUp(e) {
         e.preventDefault();
