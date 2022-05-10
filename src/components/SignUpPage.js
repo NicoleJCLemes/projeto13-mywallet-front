@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default function SignUpPage() {
 
@@ -16,7 +18,7 @@ export default function SignUpPage() {
     function signUp(e) {
         e.preventDefault();
 
-        const URL = "http://localhost:5000/sign-up/";
+        const URL = `${process.env.REACT_API}sign-up/`;
         const promise = axios.post(URL, {
             name,
             email,

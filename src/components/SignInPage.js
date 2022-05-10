@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useContext } from "react";
 import UserContext from '../context/UserContext';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default function SignInPage() {
 
@@ -17,7 +19,7 @@ export default function SignInPage() {
     function signIn(e) {
         e.preventDefault();
 
-        const URL = "http://localhost:5000/";
+        const URL = process.env.REACT_API;
 
         const promise = axios.post(URL, {
             email,

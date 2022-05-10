@@ -3,6 +3,8 @@ import UserContext from "../context/UserContext";
 import styled from 'styled-components';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 export default function Home() {
@@ -15,9 +17,6 @@ export default function Home() {
     const navigate = useNavigate();
     let total = 0;
 
-    // token
-    // router, middleware
-
     useEffect(() => {
 
         const config = {
@@ -26,7 +25,7 @@ export default function Home() {
             }
         };
 
-        const URL_D = "http://localhost:5000/deposit";
+        const URL_D = `${process.env.REACT_API}deposit/`;
         const promiseD = axios.get(URL_D, config);
     
         promiseD.then((response) => {
@@ -36,7 +35,7 @@ export default function Home() {
     
         promiseD.catch((e) => console.log("Não foi possível buscar os depósitos"));
         
-        const URL_W = "http://localhost:5000/withdrawal";
+        const URL_W = `${process.env.REACT_API}withdrawal/`;
         const promiseW = axios.get(URL_W, config);
     
         promiseW.then((response) => {
@@ -55,7 +54,7 @@ export default function Home() {
     function logOut() {
         localStorage.clear();
 
-        const promise = axios.delete(`http://localhost:5000/${userId}`, {
+        const promise = axios.delete(`${process.env.REACT_API}${userId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

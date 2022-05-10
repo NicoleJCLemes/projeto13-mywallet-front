@@ -5,6 +5,8 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default function Deposit() {
 
@@ -20,7 +22,7 @@ export default function Deposit() {
 
         console.log(amount, description)
 
-        const URL = "http://localhost:5000/deposit/";
+        const URL = `${process.env.REACT_API}deposit/`;
         const body = {
             amount,
             description

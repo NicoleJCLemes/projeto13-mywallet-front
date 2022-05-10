@@ -5,6 +5,8 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default function Withdrawal() {
 
@@ -18,7 +20,7 @@ export default function Withdrawal() {
 
         e.preventDefault();
 
-        const URL = "http://localhost:5000/withdrawal/";
+        const URL = `${process.env.REACT_API}withdrawal/`;
         const body = {
             amount,
             description
