@@ -5,8 +5,6 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
-import dotenv from 'dotenv';
-dotenv.config();
 
 export default function Deposit() {
 

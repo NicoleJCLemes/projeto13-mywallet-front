@@ -5,8 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useContext } from "react";
 import UserContext from '../context/UserContext';
-import dotenv from 'dotenv';
-dotenv.config();
 
 export default function SignInPage() {
 

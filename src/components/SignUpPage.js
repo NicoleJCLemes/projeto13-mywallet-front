@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
-import dotenv from 'dotenv';
-dotenv.config();
 
 export default function SignUpPage() {
 
