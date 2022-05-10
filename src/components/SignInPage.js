@@ -19,7 +19,7 @@ export default function SignInPage() {
     function signIn(e) {
         e.preventDefault();
 
-        const URL = process.env.REACT_API;
+        const URL = process.env.REACT_APP_API;
 
         const promise = axios.post(URL, {
             email,

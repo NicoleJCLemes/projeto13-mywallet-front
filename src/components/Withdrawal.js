@@ -20,7 +20,7 @@ export default function Withdrawal() {
 
         e.preventDefault();
 
-        const URL = `${process.env.REACT_API}withdrawal/`;
+        const URL = `${process.env.REACT_APP_API}withdrawal/`;
         const body = {
             amount,
             description

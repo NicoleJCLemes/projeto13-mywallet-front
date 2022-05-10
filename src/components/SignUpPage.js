@@ -18,7 +18,7 @@ export default function SignUpPage() {
     function signUp(e) {
         e.preventDefault();
 
-        const URL = `${process.env.REACT_API}sign-up/`;
+        const URL = `${process.env.REACT_APP_API}sign-up/`;
         const promise = axios.post(URL, {
             name,
             email,

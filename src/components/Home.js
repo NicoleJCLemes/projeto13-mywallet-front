@@ -25,7 +25,7 @@ export default function Home() {
             }
         };
 
-        const URL_D = `${process.env.REACT_API}deposit/`;
+        const URL_D = `${process.env.REACT_APP_API}deposit/`;
         const promiseD = axios.get(URL_D, config);
     
         promiseD.then((response) => {
@@ -35,7 +35,7 @@ export default function Home() {
     
         promiseD.catch((e) => console.log("Não foi possível buscar os depósitos"));
         
-        const URL_W = `${process.env.REACT_API}withdrawal/`;
+        const URL_W = `${process.env.REACT_APP_API}withdrawal/`;
         const promiseW = axios.get(URL_W, config);
     
         promiseW.then((response) => {
@@ -54,7 +54,7 @@ export default function Home() {
     function logOut() {
         localStorage.clear();
 
-        const promise = axios.delete(`${process.env.REACT_API}${userId}`, {
+        const promise = axios.delete(`${process.env.REACT_APP_API}${userId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

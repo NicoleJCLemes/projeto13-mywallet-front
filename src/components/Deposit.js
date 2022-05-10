@@ -22,7 +22,7 @@ export default function Deposit() {
 
         console.log(amount, description)
 
-        const URL = `${process.env.REACT_API}deposit/`;
+        const URL = `${process.env.REACT_APP_API}deposit/`;
         const body = {
             amount,
             description
